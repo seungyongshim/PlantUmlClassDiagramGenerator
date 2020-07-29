@@ -19,7 +19,26 @@
 
         public override string ToString()
         {
-            return $"{_baseTypeName.Identifier}{_baseLabel} {_symbol}{_subLabel} {_subTypeName.Identifier}";
+            return $"{_baseTypeName.Identifier}{_baseLabel} {_symbol} {_subTypeName.Identifier}";
+        }
+
+        public bool Equals(Relationship other)
+        {
+            if (other == null) return false;
+            return (this.GetHashCode().Equals(other.GetHashCode()));
+        }
+
+        public override bool Equals(object other)
+        {
+            Relationship mod = other as Relationship;
+            if (mod != null)
+                return Equals(mod);
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
         }
     }
 }
